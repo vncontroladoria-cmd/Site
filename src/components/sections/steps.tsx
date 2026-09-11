@@ -34,7 +34,7 @@ export function Steps() {
           {steps.items.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08} className="relative">
               <div>
-                <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-elevated text-[13px] font-medium text-fg tabular-nums shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_24px_rgba(94,106,210,0.15)]">
+                <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-elevated text-[13px] font-medium text-fg tabular-nums shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_24px_rgba(34,197,94,0.15)]">
                   {i + 1}
                 </span>
                 <h3 className="mt-5 text-lg font-semibold tracking-tight text-fg">

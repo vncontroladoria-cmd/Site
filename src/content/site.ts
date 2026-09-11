@@ -1,31 +1,33 @@
 /**
  * TODO O TEXTO DA LANDING PAGE MORA AQUI.
- * Trocar de produto = editar só este arquivo. Nenhum componente tem copy fixa.
+ * Conteúdo real da VN — Visão do Negócio.
  */
 
 export const site = {
-  name: "VN Controladoria",
-  tagline: "Controladoria financeira para salões de beleza",
+  name: "Visão do Negócio",
+  fullName: "VN — Visão do Negócio",
+  tagline: "Controladoria financeira para salões, barbearias e clínicas",
+  whatsapp: "(13) 98110-1850",
 
   nav: [
+    { label: "A Empresa", href: "#empresa" },
     { label: "Como funciona", href: "#como-funciona" },
-    { label: "Recursos", href: "#recursos" },
-    { label: "Planos", href: "#planos" },
+    { label: "eBooks", href: "#ebooks" },
     { label: "Dúvidas", href: "#duvidas" },
   ],
 
   hero: {
-    badge: "Fechamento de dezembro já disponível",
-    headline: "O caixa do salão para de ser um mistério.",
-    highlight: "para de ser um mistério",
+    badge: "Atendendo salões, barbearias, clínicas e empresas em todo o Brasil",
+    headline: "O financeiro que falta para o seu negócio prosperar.",
+    highlight: "prosperar",
     subhead:
-      "Comissões, taxas de cartão, custo por atendimento e retirada dos sócios em um só lugar. Você abre o mês sabendo exatamente quanto sobrou e por quê.",
-    primaryCta: "Ver um diagnóstico do meu salão",
-    secondaryCta: "Falar com um consultor",
-    note: "Sem cartão. Diagnóstico em 15 minutos.",
+      "Controladoria financeira especializada em salões de beleza, barbearias, clínicas estéticas e empresas que querem crescer com método. Trazemos a visão que falta para você parar de trabalhar no escuro — e começar a decidir com clareza, lucro e tranquilidade.",
+    primaryCta: "Fazer diagnóstico gratuito",
+    secondaryCta: "Falar com especialista",
+    note: "+8 anos transformando o financeiro de empresários da beleza",
   },
 
-  /** Números do painel que aparece abaixo do hero */
+  /** Painel de exemplo no hero. Números ilustrativos — troque pelos reais se preferir. */
   panel: {
     title: "Fechamento · Março",
     rows: [
@@ -38,191 +40,177 @@ export const site = {
     footnote: "Margem de 40,3% — 6,1 p.p. acima de fevereiro",
   },
 
+  /** ATENÇÃO: esta seção eu escrevi. Não existia no seu site — ajuste se não bater. */
   steps: {
-    title: "Três semanas até o primeiro fechamento confiável",
+    title: "Como a VN entra no seu negócio",
     subtitle:
-      "Não é software para você preencher sozinho. A implantação é feita com você.",
+      "Não entregamos relatório e sumimos. Acompanhamento próximo pra você entender, aplicar e crescer.",
     items: [
       {
-        title: "Levantamento",
-        body: "Puxamos extratos, maquininhas e a agenda dos últimos 6 meses. Você não digita nada.",
+        title: "Diagnóstico",
+        body: "Olhamos os números reais do seu negócio e mostramos onde o lucro está vazando. Gratuito e sem compromisso.",
       },
       {
-        title: "Estrutura",
-        body: "Plano de contas, centros de custo por profissional e regras de comissão configurados no seu modelo.",
+        title: "Estruturação",
+        body: "Aplicamos os métodos CDB e DCAE: plano de contas, separação PJ + PF, comissões e indicadores no seu modelo.",
       },
       {
-        title: "Fechamento",
-        body: "Primeiro DRE fechado e revisado junto com você. A partir daí, todo dia 5.",
+        title: "Acompanhamento",
+        body: "DRE, fluxo de caixa e metas revisados com você todo mês — decisão com base em dados, não em achismo.",
       },
     ],
   },
 
   features: {
-    title: "O que você passa a enxergar",
-    subtitle: "Cada número com origem rastreável até o lançamento.",
+    title: "A controladoria criada para quem vive do faturamento diário",
+    subtitle:
+      "A maioria dos donos de salões, barbearias e clínicas não trata o financeiro com a seriedade que ele merece — e por isso fecha as portas sem entender o motivo.",
     items: [
       {
         icon: "ChartSpline",
-        title: "DRE que fecha",
-        body: "Demonstrativo mensal reconciliado com banco e maquininha. Diferença de centavos é apontada, não escondida.",
+        title: "Controladoria completa",
+        body: "DRE, fluxo de caixa, indicadores e tomada de decisão baseada em dados — não em achismo.",
         span: "hero",
       },
       {
-        icon: "Users",
-        title: "Lucro por profissional",
-        body: "Quanto cada cadeira gera depois da comissão e do custo do produto.",
+        icon: "Compass",
+        title: "Mentoria estratégica",
+        body: "Acompanhamento próximo pra você entender, aplicar e crescer — não só receber relatório.",
         span: "wide",
       },
       {
-        icon: "CreditCard",
-        title: "Taxas de cartão",
-        body: "Antecipação, MDR e prazo de recebimento por bandeira.",
-        span: "normal",
-      },
-      {
-        icon: "Scissors",
-        title: "Custo por atendimento",
-        body: "Produto, tempo de cadeira e rateio do fixo em cada serviço da tabela.",
+        icon: "Target",
+        title: "Suporte comercial",
+        body: "Metas, comissões e performance da equipe. Financeiro que conversa com o comercial.",
         span: "normal",
       },
       {
         icon: "Wallet",
-        title: "Pró-labore separado",
-        body: "A retirada dos sócios deixa de se misturar com o caixa da operação.",
+        title: "Organização PJ + PF",
+        body: "Separamos o que é seu do que é da empresa — e organizamos a vida financeira do empresário também.",
+        span: "normal",
+      },
+      {
+        icon: "BookOpen",
+        title: "Método CDB",
+        body: "Curso completo para organizar a vida financeira pessoal do empresário e construir patrimônio com método.",
         span: "wide",
       },
       {
-        icon: "CalendarClock",
-        title: "Fluxo projetado",
-        body: "Saldo dos próximos 90 dias com recebíveis já agendados.",
+        icon: "Layers",
+        title: "Método DCAE",
+        body: "Nosso método interno de controle empresarial: diagnóstico, análise, controle e expansão.",
         span: "normal",
       },
     ],
   },
 
   proof: {
-    quote:
-      "Eu achava que o problema era faturamento. Era comissão mal calculada em quatro serviços. Achamos isso no primeiro mês.",
-    author: "Camila Reis",
-    role: "Sócia, Studio Reis · 14 profissionais",
+    quote: "Salão lotado não é salão lucrativo. Visão muda tudo.",
+    author: "Nicollas Bueno & Carol Calixto",
+    role: "Fundadores · VN — Visão do Negócio",
     stats: [
-      { value: "40h", label: "por mês devolvidas ao gestor" },
-      { value: "R$ 9,2 mil", label: "de erro médio achado na implantação" },
-      { value: "dia 5", label: "fechamento na sua mesa" },
+      { value: "+8", label: "anos no mercado financeiro" },
+      { value: "Brasil", label: "atendimento em todo o território nacional" },
+      { value: "2", label: "métodos próprios: CDB e DCAE" },
+      { value: "4", label: "eBooks publicados na área de gestão" },
     ],
   },
 
-  pricing: {
-    title: "Planos",
-    subtitle: "Preço por porte do salão. Sem taxa de implantação.",
-    plans: [
+  ebooks: {
+    title: "Coleção Diagnóstico do Salão",
+    subtitle:
+      "4 volumes para identificar, entender e transformar os problemas reais que travam o seu negócio — escritos por quem vive os bastidores do salão todos os dias.",
+    price: "R$ 29,90",
+    priceNote: "por volume · acesso imediato · plataforma Kiwify",
+    cta: "Quero este volume",
+    volumes: [
       {
-        name: "Essencial",
-        price: "R$ 690",
-        period: "/mês",
-        description: "Até 6 profissionais.",
-        features: [
-          "DRE mensal fechado",
-          "Conciliação de banco e maquininha",
-          "Painel de lucro por profissional",
-          "Suporte por WhatsApp",
-        ],
-        cta: "Começar",
-        featured: false,
+        number: "01",
+        title: "O Profissional que Trava o Salão",
+        body: "25 sintomas individuais que sabotam o seu negócio — e como resolver cada um.",
       },
       {
-        name: "Controladoria",
-        price: "R$ 1.290",
-        period: "/mês",
-        description: "Até 20 profissionais.",
-        features: [
-          "Tudo do Essencial",
-          "Custo por atendimento e por serviço",
-          "Fluxo de caixa projetado (90 dias)",
-          "Reunião mensal de leitura do resultado",
-          "Precificação da tabela revisada",
-        ],
-        cta: "Falar com um consultor",
-        featured: true,
+        number: "02",
+        title: "Quando a Equipe Trava o Salão",
+        body: "21 sintomas coletivos que paralisam o negócio — e como criar uma equipe saudável de verdade.",
       },
       {
-        name: "Rede",
-        price: "Sob medida",
-        period: "",
-        description: "Duas ou mais unidades.",
-        features: [
-          "Tudo da Controladoria",
-          "Consolidado multiunidade",
-          "Comparativo entre lojas",
-          "Consultor dedicado",
-        ],
-        cta: "Pedir proposta",
-        featured: false,
+        number: "03",
+        title: "O Dono é o Espelho do Salão",
+        body: "21 sintomas de liderança que estão sabotando o seu próprio negócio. A verdade que ninguém te conta.",
+      },
+      {
+        number: "04",
+        title: "Salão Cheio, Caixa Vazio",
+        body: "22 sintomas de gestão que fazem você trabalhar muito e ganhar pouco — e como virar essa página.",
       },
     ],
   },
 
+  /** ATENÇÃO: perguntas escritas por mim a partir do seu site. Revise as respostas. */
   faq: {
     title: "Dúvidas",
     items: [
       {
+        q: "Vocês atendem fora de São Paulo?",
+        a: "Sim. Atendemos negócios em todo o território nacional, de forma remota e com acompanhamento próximo.",
+      },
+      {
         q: "Preciso trocar meu sistema de agenda?",
-        a: "Não. Trabalhamos em cima do que você já usa — Belle, Avec, Trinks, planilha. A integração é feita na implantação.",
+        a: "Não. Trabalhamos em cima do que você já usa. A integração é feita na implantação.",
       },
       {
-        q: "Quem lança as informações?",
-        a: "Nós. Você envia extratos e acessos uma vez; a rotina de lançamento e conciliação é nossa.",
+        q: "Isso substitui meu contador?",
+        a: "Não. Contabilidade olha para o fisco, controladoria olha para a decisão. Os dois convivem — enviamos os dados prontos para ele.",
       },
       {
-        q: "E se meu contador já faz isso?",
-        a: "Contabilidade olha para o fisco, controladoria olha para a decisão. Os dois convivem — enviamos os dados prontos para ele.",
+        q: "O que é a organização PJ + PF?",
+        a: "Separamos o dinheiro da empresa do dinheiro de casa, e organizamos as duas frentes. É o ponto onde a maioria dos donos se perde.",
       },
       {
-        q: "Tem fidelidade?",
-        a: "Contrato de 12 meses no Essencial e na Controladoria, com saída sem multa nos primeiros 60 dias.",
-      },
-      {
-        q: "Funciona para salão pequeno?",
-        a: "A partir de 3 profissionais o ganho já paga o plano. Abaixo disso, indicamos começar pelo diagnóstico avulso.",
+        q: "Atende barbearia e clínica de estética também?",
+        a: "Sim. Salões, barbearias, clínicas estéticas e outras empresas que vivem de faturamento diário.",
       },
     ],
   },
 
   finalCta: {
-    title: "Descubra onde seu lucro está vazando",
-    body: "O diagnóstico usa os últimos 3 meses do seu salão e aponta os pontos de perda. Leva 15 minutos e é gratuito.",
-    cta: "Agendar diagnóstico",
+    title: "Vamos conversar sobre o seu negócio?",
+    body: "Atendimento humano, direto com a equipe VN. Sem robô, sem promessa vazia. Chame no WhatsApp e descubra como podemos destravar o seu financeiro.",
+    cta: "Chamar no WhatsApp · (13) 98110-1850",
   },
 
   footer: {
     columns: [
       {
-        title: "Produto",
+        title: "Navegação",
         links: [
+          { label: "A Empresa", href: "#empresa" },
           { label: "Como funciona", href: "#como-funciona" },
-          { label: "Recursos", href: "#recursos" },
-          { label: "Planos", href: "#planos" },
-        ],
-      },
-      {
-        title: "Conteúdo",
-        links: [
-          { label: "Blog", href: "#" },
-          { label: "Coleção Diagnóstico do Salão", href: "#" },
-          { label: "Calculadora de comissão", href: "#" },
+          { label: "eBooks", href: "#ebooks" },
+          { label: "Dúvidas", href: "#duvidas" },
         ],
       },
       {
         title: "Contato",
         links: [
-          { label: "WhatsApp", href: "#" },
-          { label: "Instagram", href: "#" },
-          { label: "E-mail", href: "#" },
+          { label: "WhatsApp (13) 98110-1850", href: "#" },
+          { label: "Comprar eBooks", href: "#ebooks" },
+          { label: "@nicollas.financeiro", href: "#" },
+        ],
+      },
+      {
+        title: "Métodos",
+        links: [
+          { label: "Método CDB", href: "#empresa" },
+          { label: "Método DCAE", href: "#empresa" },
+          { label: "Diagnóstico do Salão", href: "#ebooks" },
         ],
       },
     ],
-    legal: "© 2026 VN Controladoria Financeira. Todos os direitos reservados.",
+    legal:
+      "© 2026 VN — Visão do Negócio · Controladoria Financeira. Feito com método. Entregue com cuidado.",
   },
 } as const;
 

@@ -1,9 +1,9 @@
 import {
-  CalendarClock,
+  BookOpen,
   ChartSpline,
-  CreditCard,
-  Scissors,
-  Users,
+  Compass,
+  Layers,
+  Target,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -14,11 +14,11 @@ import { cn } from "@/lib/cn";
 
 const icons: Record<string, LucideIcon> = {
   ChartSpline,
-  Users,
-  CreditCard,
-  Scissors,
+  Compass,
+  Target,
   Wallet,
-  CalendarClock,
+  BookOpen,
+  Layers,
 };
 
 /**
@@ -35,7 +35,7 @@ const spans: Record<string, string> = {
 export function Features() {
   return (
     <section
-      id="recursos"
+      id="empresa"
       className="relative border-t border-white/[0.06] px-5 py-16 sm:px-8 sm:py-24 lg:py-32"
     >
       <div className="mx-auto max-w-6xl">

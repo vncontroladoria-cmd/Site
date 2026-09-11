@@ -14,7 +14,7 @@ export function FinalCta() {
       {/* poça de luz concentrada atrás do CTA — o ponto mais claro da página */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-[420px] max-w-3xl bg-[radial-gradient(ellipse_at_center,rgba(94,106,210,0.18),transparent_70%)] blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-[420px] max-w-3xl bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.16),transparent_70%)] blur-3xl"
       />
 
       <Reveal className="relative mx-auto max-w-2xl text-center">

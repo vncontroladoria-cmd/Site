@@ -14,7 +14,7 @@ export function Proof() {
               {proof.quote}
             </blockquote>
             <figcaption className="mt-7 flex items-center gap-3">
-              <span className="h-9 w-9 rounded-full border border-white/10 bg-[radial-gradient(circle_at_30%_30%,rgba(94,106,210,0.5),rgba(94,106,210,0.1))]" />
+              <span className="h-9 w-9 rounded-full border border-white/10 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.5),rgba(34,197,94,0.1))]" />
               <span className="text-sm">
                 <span className="block text-fg">{proof.author}</span>
                 <span className="block text-fg-muted">{proof.role}</span>

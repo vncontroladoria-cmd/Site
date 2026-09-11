@@ -44,7 +44,7 @@ export function SpotlightCard({
         "shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_2px_20px_rgba(0,0,0,0.4),0_0_40px_rgba(0,0,0,0.2)]",
         "transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
         "hover:-translate-y-1 hover:border-white/[0.1]",
-        "hover:shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_8px_40px_rgba(0,0,0,0.5),0_0_80px_rgba(94,106,210,0.1)]",
+        "hover:shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_8px_40px_rgba(0,0,0,0.5),0_0_80px_rgba(34,197,94,0.1)]",
         className,
       )}
       {...props}
@@ -57,7 +57,7 @@ export function SpotlightCard({
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(94,106,210,0.15), transparent 70%)",
+              "radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(34,197,94,0.15), transparent 70%)",
           }}
         />
       )}

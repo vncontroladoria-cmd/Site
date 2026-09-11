@@ -9,9 +9,9 @@ const variants: Record<Variant, string> = {
   // Sem o glow o botão fica "incompleto" nesta linguagem visual.
   primary: cn(
     "bg-accent text-white",
-    "shadow-[0_0_0_1px_rgba(94,106,210,0.5),0_4px_12px_rgba(94,106,210,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)]",
+    "shadow-[0_0_0_1px_rgba(34,197,94,0.5),0_4px_12px_rgba(34,197,94,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)]",
     "hover:bg-accent-bright",
-    "hover:shadow-[0_0_0_1px_rgba(94,106,210,0.6),0_6px_24px_rgba(94,106,210,0.45),inset_0_1px_0_0_rgba(255,255,255,0.25)]",
+    "hover:shadow-[0_0_0_1px_rgba(34,197,94,0.6),0_6px_24px_rgba(34,197,94,0.45),inset_0_1px_0_0_rgba(255,255,255,0.25)]",
   ),
   // Vidro: sem borda real, só a hairline por inset shadow.
   secondary: cn(

@@ -7,18 +7,18 @@
    --color-accent  ->  bg-accent / text-accent / border-accent
 --------------------------------------------------------------- */
 @theme {
-  /* Superfícies */
-  --color-deep: #020203;
-  --color-base: #050506;
-  --color-elevated: #0a0a0c;
+  /* Superfícies — quase pretas com leve tom verde, como o site atual da VN */
+  --color-deep: #010402;
+  --color-base: #040805;
+  --color-elevated: #08100b;
 
   /* Texto */
   --color-fg: #ededef;
   --color-fg-muted: #8a8f98;
 
-  /* Acento */
-  --color-accent: #5e6ad2;
-  --color-accent-bright: #6872d9;
+  /* Acento — verde da marca VN */
+  --color-accent: #22c55e;
+  --color-accent-bright: #4ade80;
 
   /* Tipografia */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -30,9 +30,9 @@
   --shadow-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 2px 20px rgb(0 0 0 / 0.4),
     0 0 40px rgb(0 0 0 / 0.2);
   --shadow-card-hover: 0 0 0 1px rgb(255 255 255 / 0.1),
-    0 8px 40px rgb(0 0 0 / 0.5), 0 0 80px rgb(94 106 210 / 0.1);
-  --shadow-accent: 0 0 0 1px rgb(94 106 210 / 0.5),
-    0 4px 12px rgb(94 106 210 / 0.3), inset 0 1px 0 0 rgb(255 255 255 / 0.2);
+    0 8px 40px rgb(0 0 0 / 0.5), 0 0 80px rgb(34 197 94 / 0.1);
+  --shadow-accent: 0 0 0 1px rgb(34 197 94 / 0.5),
+    0 4px 12px rgb(34 197 94 / 0.3), inset 0 1px 0 0 rgb(255 255 255 / 0.2);
   --shadow-inset-hairline: inset 0 1px 0 0 rgb(255 255 255 / 0.1);
 
   /* Animações de ambiente */
@@ -86,13 +86,13 @@
   }
 
   ::selection {
-    background: rgb(94 106 210 / 0.35);
+    background: rgb(34 197 94 / 0.3);
   }
 
   /* Foco sempre visível, na cor de acento, com offset igual ao fundo */
   :focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-base), 0 0 0 4px rgb(94 106 210 / 0.6);
+    box-shadow: 0 0 0 2px var(--color-base), 0 0 0 4px rgb(34 197 94 / 0.6);
     border-radius: 0.5rem;
   }
 }
@@ -114,9 +114,9 @@
 @utility text-gradient-accent {
   background-image: linear-gradient(
     to right,
-    #5e6ad2,
-    #818cf8,
-    #5e6ad2
+    #22c55e,
+    #86efac,
+    #22c55e
   );
   background-size: 200% auto;
   background-clip: text;

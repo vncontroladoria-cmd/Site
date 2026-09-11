@@ -19,10 +19,10 @@ export function AmbientBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)]" />
 
       {/* 3 — blobs (antes do ruído para o grão cair por cima) */}
-      <div className="absolute -top-[28rem] left-1/2 h-[1400px] w-[900px] -translate-x-1/2 animate-[float_9s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(94,106,210,0.25)_0%,transparent_70%)] blur-[150px]" />
-      <div className="absolute top-[20%] -left-40 h-[800px] w-[600px] animate-[float_13s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(147,51,234,0.15)_0%,rgba(236,72,153,0.08)_45%,transparent_70%)] blur-[120px]" />
-      <div className="absolute top-[45%] -right-32 h-[700px] w-[500px] animate-[float_11s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(79,70,229,0.12)_0%,transparent_70%)] blur-[100px]" />
-      <div className="absolute bottom-0 left-1/3 h-[600px] w-[700px] animate-[pulse-soft_7s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(94,106,210,0.1)_0%,transparent_70%)] blur-[130px]" />
+      <div className="absolute -top-[28rem] left-1/2 h-[1400px] w-[900px] -translate-x-1/2 animate-[float_9s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.22)_0%,transparent_70%)] blur-[150px]" />
+      <div className="absolute top-[20%] -left-40 h-[800px] w-[600px] animate-[float_13s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.14)_0%,rgba(5,150,105,0.08)_45%,transparent_70%)] blur-[120px]" />
+      <div className="absolute top-[45%] -right-32 h-[700px] w-[500px] animate-[float_11s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.10)_0%,transparent_70%)] blur-[100px]" />
+      <div className="absolute bottom-0 left-1/3 h-[600px] w-[700px] animate-[pulse-soft_7s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.1)_0%,transparent_70%)] blur-[130px]" />
 
       {/* 2 — ruído */}
       <div

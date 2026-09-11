@@ -114,10 +114,10 @@ function HeroPanel() {
       {/* halo por trás do painel */}
       <div
         aria-hidden
-        className="absolute -inset-x-16 -top-10 bottom-0 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(94,106,210,0.18),transparent_70%)] blur-2xl"
+        className="absolute -inset-x-16 -top-10 bottom-0 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.16),transparent_70%)] blur-2xl"
       />
 
-      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-elevated/90 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(0,0,0,0.6),0_0_120px_rgba(94,106,210,0.08)] backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-elevated/90 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(0,0,0,0.6),0_0_120px_rgba(34,197,94,0.08)] backdrop-blur-xl">
         <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.18),transparent)]" />
 
         {/* barra de janela */}
