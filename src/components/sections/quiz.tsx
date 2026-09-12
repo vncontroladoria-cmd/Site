@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -9,10 +9,24 @@ import { site } from "@/content/site";
 
 const { diagnostico, contato } = site;
 
-type Stage = "intro" | "form" | "enviando" | "sucesso" | "erro";
-type Answers = Record<string, string | string[]>;
+type Stage = "intro" | "form" | "enviando" | "resultado" | "erro";
+type Answers = Record<string, string>;
 
-const total = diagnostico.questions.length;
+/**
+ * Achata os módulos numa lista linear de telas, guardando de qual módulo
+ * cada pergunta veio. Assim a navegação é simples (um índice só) e ainda
+ * dá para mostrar em que módulo a pessoa está.
+ */
+const telas = diagnostico.modulos.flatMap((modulo, mi) =>
+  modulo.perguntas.map((pergunta, pi) => ({
+    modulo,
+    moduloIndex: mi,
+    primeiraDoModulo: pi === 0,
+    pergunta,
+  })),
+);
+
+const total = telas.length;
 
 export function Quiz() {
   const reduce = useReducedMotion();
@@ -20,28 +34,37 @@ export function Quiz() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
 
-  const question = diagnostico.questions[index];
-  const answer = answers[question?.id ?? ""];
-  const progress =
-    stage === "sucesso" ? 100 : (index / total) * 100;
+  const tela = telas[index];
+  const pergunta = tela?.pergunta;
+  const valor = answers[pergunta?.id ?? ""] ?? "";
+  const progresso = (index / total) * 100;
 
-  // Uma resposta só conta como preenchida se tiver conteúdo de verdade.
-  const preenchida = Array.isArray(answer)
-    ? answer.length > 0
-    : typeof answer === "string" && answer.trim().length > 0;
-  const podeAvancar = !question?.required || preenchida;
+  const preenchida = valor.trim().length > 0;
+  const podeAvancar = !pergunta?.required || preenchida;
 
-  function set(value: string | string[]) {
-    setAnswers((prev) => ({ ...prev, [question.id]: value }));
-  }
+  /** Nota de cada módulo: só perguntas pontuadas entram na conta. */
+  const notas = useMemo(() => {
+    return diagnostico.modulos
+      .filter((m) => m.perguntas.some((p) => p.scored !== false))
+      .map((modulo) => {
+        const pontuadas = modulo.perguntas.filter((p) => p.scored !== false);
+        const soma = pontuadas.reduce((acc, p) => {
+          const escolhida = p.options?.find((o) => o.label === answers[p.id]);
+          return acc + (escolhida?.weight ?? 0);
+        }, 0);
+        const pct = Math.round((soma / (pontuadas.length * 2)) * 100);
+        const faixa =
+          diagnostico.faixas.find((f) => pct >= f.min) ??
+          diagnostico.faixas[diagnostico.faixas.length - 1];
+        return { nome: modulo.nome, descricao: modulo.descricao, pct, faixa };
+      });
+  }, [answers]);
 
-  function toggleMulti(option: string) {
-    const atual = Array.isArray(answer) ? answer : [];
-    set(
-      atual.includes(option)
-        ? atual.filter((o) => o !== option)
-        : [...atual, option],
-    );
+  // O eixo mais frágil vira a prioridade sugerida.
+  const prioridade = [...notas].sort((a, b) => a.pct - b.pct)[0];
+
+  function set(v: string) {
+    setAnswers((prev) => ({ ...prev, [pergunta.id]: v }));
   }
 
   function avancar() {
@@ -58,14 +81,10 @@ export function Quiz() {
   async function enviar() {
     setStage("enviando");
 
-    // Monta um e-mail legível: a pergunta inteira seguida da resposta.
     const corpo: Record<string, string> = {};
-    for (const q of diagnostico.questions) {
-      const valor = answers[q.id];
-      corpo[q.q] = Array.isArray(valor)
-        ? valor.join(", ")
-        : (valor ?? "—").toString();
-    }
+    for (const t of telas) corpo[t.pergunta.q] = answers[t.pergunta.id] || "—";
+    for (const n of notas) corpo[`NOTA · ${n.nome}`] = `${n.pct}% (${n.faixa.rotulo})`;
+    corpo["PRIORIDADE"] = prioridade?.nome ?? "—";
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -73,14 +92,13 @@ export function Quiz() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: diagnostico.accessKey,
-          subject: `Novo diagnóstico VN — ${answers.nome ?? "sem nome"}`,
+          subject: `Diagnóstico VN — ${answers.nome ?? "sem nome"}`,
           from_name: "Site VN — Diagnóstico",
           ...corpo,
         }),
       });
-
       const data = await res.json();
-      setStage(data.success ? "sucesso" : "erro");
+      setStage(data.success ? "resultado" : "erro");
     } catch {
       setStage("erro");
     }
@@ -102,17 +120,19 @@ export function Quiz() {
     <div className="mx-auto w-full max-w-2xl">
       {(stage === "form" || stage === "enviando") && (
         <div className="mb-10">
-          <div className="flex items-baseline justify-between text-[13px] text-fg-muted">
-            <span>
-              Pergunta {index + 1} de {total}
+          <div className="flex items-baseline justify-between gap-4 text-[13px]">
+            <span className="text-accent">
+              {tela?.modulo.nome ?? "Enviando"}
             </span>
-            <span className="tabular-nums">{Math.round(progress)}%</span>
+            <span className="text-fg-muted tabular-nums">
+              {index + 1} de {total}
+            </span>
           </div>
           <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-white/[0.06]">
             <motion.div
               className="h-full rounded-full bg-accent shadow-[0_0_12px_rgba(34,197,94,0.6)]"
               initial={false}
-              animate={{ width: `${progress}%` }}
+              animate={{ width: `${stage === "enviando" ? 100 : progresso}%` }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             />
           </div>
@@ -129,6 +149,18 @@ export function Quiz() {
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-fg-muted text-pretty">
               {diagnostico.intro.body}
             </p>
+
+            <ul className="mx-auto mt-8 flex max-w-md flex-wrap justify-center gap-2">
+              {diagnostico.modulos.map((m) => (
+                <li
+                  key={m.id}
+                  className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-[13px] text-fg-muted"
+                >
+                  {m.nome}
+                </li>
+              ))}
+            </ul>
+
             <div className="mt-9 flex justify-center">
               <Button size="lg" onClick={() => setStage("form")}>
                 {diagnostico.intro.cta}
@@ -139,89 +171,52 @@ export function Quiz() {
         )}
 
         {stage === "form" && (
-          <motion.div key={question.id} {...fade}>
-            <h2 className="text-xl leading-snug font-semibold tracking-tight text-balance text-fg sm:text-2xl">
-              {question.q}
-            </h2>
-            {!question.required && (
-              <p className="mt-2 text-[13px] text-fg-muted">Opcional</p>
+          <motion.div key={pergunta.id} {...fade}>
+            {/* Abertura de módulo: a pessoa sabe que mudou de assunto. */}
+            {tela.primeiraDoModulo && (
+              <p className="mb-5 text-[13px] text-fg-muted">
+                {tela.modulo.descricao}
+              </p>
             )}
 
+            <h2 className="text-xl leading-snug font-semibold tracking-tight text-balance text-fg sm:text-2xl">
+              {pergunta.q}
+            </h2>
+
             <div className="mt-8">
-              {question.type === "single" && (
+              {pergunta.type === "single" && (
                 <div className="flex flex-col gap-3">
-                  {question.options?.map((option) => {
-                    const ativo = answer === option;
+                  {pergunta.options?.map((option) => {
+                    const ativo = valor === option.label;
                     return (
                       <button
-                        key={option}
+                        key={option.label}
                         type="button"
-                        onClick={() => set(option)}
-                        className={`group flex items-center justify-between gap-4 rounded-xl border px-5 py-4 text-left text-sm transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.99] ${
+                        onClick={() => set(option.label)}
+                        className={`flex items-center justify-between gap-4 rounded-xl border px-5 py-4 text-left text-sm transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.99] ${
                           ativo
                             ? "border-accent/50 bg-accent/[0.1] text-fg"
                             : "border-white/[0.06] bg-gradient-to-b from-white/[0.06] to-white/[0.02] text-fg hover:border-accent/40 hover:bg-accent/[0.06]"
                         }`}
                       >
-                        {option}
-                        {ativo && <Check size={15} className="shrink-0 text-accent" />}
+                        {option.label}
+                        {ativo && (
+                          <Check size={15} className="shrink-0 text-accent" />
+                        )}
                       </button>
                     );
                   })}
                 </div>
               )}
 
-              {question.type === "multi" && (
-                <div className="flex flex-col gap-3">
-                  {question.options?.map((option) => {
-                    const ativo =
-                      Array.isArray(answer) && answer.includes(option);
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => toggleMulti(option)}
-                        className={`flex items-center justify-between gap-4 rounded-xl border px-5 py-4 text-left text-sm transition-all duration-200 active:scale-[0.99] ${
-                          ativo
-                            ? "border-accent/50 bg-accent/[0.1] text-fg"
-                            : "border-white/[0.06] bg-gradient-to-b from-white/[0.06] to-white/[0.02] text-fg hover:border-accent/40"
-                        }`}
-                      >
-                        {option}
-                        <span
-                          className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border ${
-                            ativo
-                              ? "border-accent bg-accent text-black"
-                              : "border-white/20"
-                          }`}
-                        >
-                          {ativo && <Check size={11} strokeWidth={3} />}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-
-              {(question.type === "text" || question.type === "tel") && (
+              {(pergunta.type === "text" || pergunta.type === "tel") && (
                 <input
-                  type={question.type === "tel" ? "tel" : "text"}
-                  value={typeof answer === "string" ? answer : ""}
+                  type={pergunta.type === "tel" ? "tel" : "text"}
+                  value={valor}
                   onChange={(e) => set(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && avancar()}
-                  placeholder={question.placeholder}
+                  placeholder={pergunta.placeholder}
                   className={inputClass}
-                  autoFocus
-                />
-              )}
-
-              {question.type === "textarea" && (
-                <textarea
-                  value={typeof answer === "string" ? answer : ""}
-                  onChange={(e) => set(e.target.value)}
-                  placeholder={question.placeholder}
-                  rows={5}
-                  className={`${inputClass} resize-none`}
                   autoFocus
                 />
               )}
@@ -238,7 +233,7 @@ export function Quiz() {
               </button>
 
               <Button onClick={avancar} disabled={!podeAvancar} size="lg">
-                {index + 1 === total ? "Enviar diagnóstico" : "Continuar"}
+                {index + 1 === total ? "Ver meu diagnóstico" : "Continuar"}
                 <ArrowRight size={15} />
               </Button>
             </div>
@@ -248,24 +243,67 @@ export function Quiz() {
         {stage === "enviando" && (
           <motion.div key="enviando" {...fade} className="py-16 text-center">
             <Loader2 size={22} className="mx-auto animate-spin text-accent" />
-            <p className="mt-4 text-sm text-fg-muted">Enviando suas respostas…</p>
+            <p className="mt-4 text-sm text-fg-muted">
+              Calculando o resultado…
+            </p>
           </motion.div>
         )}
 
-        {stage === "sucesso" && (
-          <motion.div key="sucesso" {...fade} className="text-center">
-            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent">
-              <Check size={22} />
-            </span>
-            <h2 className="text-gradient mt-6 text-2xl font-semibold tracking-tight sm:text-3xl">
-              {diagnostico.sucesso.title}
+        {stage === "resultado" && (
+          <motion.div key="resultado" {...fade}>
+            <h2 className="text-gradient text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              {diagnostico.resultado.title}
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-fg-muted text-pretty">
-              {diagnostico.sucesso.body}
+            <p className="mt-4 text-base leading-relaxed text-fg-muted text-pretty">
+              {diagnostico.resultado.body}
             </p>
-            <div className="mt-8 flex justify-center">
-              <Button size="lg" href={contato.whatsapp}>
-                {diagnostico.sucesso.cta}
+
+            {prioridade && (
+              <div className="mt-8 rounded-2xl border border-accent/30 bg-accent/[0.07] p-5">
+                <p className="text-[11px] tracking-widest text-accent uppercase">
+                  {diagnostico.resultado.prioridadeLabel}
+                </p>
+                <p className="mt-2 text-lg font-semibold tracking-tight text-fg">
+                  {prioridade.nome}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-fg-muted">
+                  {prioridade.faixa.descricao} {prioridade.descricao}
+                </p>
+              </div>
+            )}
+
+            {/* Uma barra por eixo: dá para ver o desequilíbrio de relance. */}
+            <div className="mt-8 flex flex-col gap-5">
+              {notas.map((nota) => (
+                <div key={nota.nome}>
+                  <div className="flex items-baseline justify-between gap-4 text-sm">
+                    <span className="text-fg">{nota.nome}</span>
+                    <span className="text-fg-muted tabular-nums">
+                      {nota.pct}% · {nota.faixa.rotulo}
+                    </span>
+                  </div>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                    <motion.div
+                      className="h-full rounded-full bg-accent"
+                      initial={reduce ? false : { width: 0 }}
+                      animate={{ width: `${nota.pct}%` }}
+                      transition={{
+                        duration: 0.8,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-8 text-[13px] leading-relaxed text-fg-muted">
+              {diagnostico.resultado.nota}
+            </p>
+
+            <div className="mt-6">
+              <Button size="lg" href={contato.whatsapp} className="w-full sm:w-auto">
+                {diagnostico.resultado.cta}
               </Button>
             </div>
           </motion.div>
