@@ -1,4 +1,5 @@
 import { Faq } from "@/components/sections/faq";
+import { ChamadaDiagnostico } from "@/components/sections/chamada-diagnostico";
 import { Equipe } from "@/components/sections/equipe";
 import { Features } from "@/components/sections/features";
 import { FinalCta } from "@/components/sections/final-cta";
@@ -23,6 +24,7 @@ export default function Home() {
         <Equipe />
         <Pricing />
         <Faq />
+        <ChamadaDiagnostico />
         <FinalCta />
       </main>
       <SiteFooter />
