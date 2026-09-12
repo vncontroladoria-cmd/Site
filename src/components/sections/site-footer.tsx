@@ -7,11 +7,11 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(3,1fr)]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-accent/20 text-[13px] font-semibold text-fg">
-                VN
+              <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white">
+                <img src={site.logo} alt="" className="h-full w-full object-contain" />
               </span>
               <span className="text-[15px] font-medium tracking-tight text-fg">
-                {site.name}
+                {site.fullName}
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-fg-muted">
