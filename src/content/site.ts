@@ -14,31 +14,21 @@ export const site = {
     { label: "Métodos", href: "#metodos" },
     { label: "Equipe", href: "#equipe" },
     { label: "eBooks", href: "#ebooks" },
+    { label: "Diagnóstico", href: "#diagnostico" },
   ],
 
   hero: {
     badge: "Atendendo salões, barbearias, clínicas e empresas em todo o Brasil",
-    headline: "O financeiro que falta para o seu negócio prosperar.",
+    headline: "O financeiro que falta para o seu salão prosperar.",
     highlight: "prosperar",
     subhead:
       "Controladoria financeira especializada em salões de beleza, barbearias, clínicas estéticas e empresas que querem crescer com método. Trazemos a visão que falta para você parar de trabalhar no escuro — e começar a decidir com clareza, lucro e tranquilidade.",
-    primaryCta: "Fazer diagnóstico gratuito",
-    primaryHref: "/diagnostico",
-    secondaryCta: "Falar com especialista",
+    primaryCta: "Falar com especialista",
+    primaryHref: "https://wa.me/5513981101850",
+    secondaryCta: "Conhecer a VN",
+    secondaryHref: "#empresa",
+    image: "/img/equipe-vn.jpg",
     note: "+8 anos transformando o financeiro de empresários da beleza",
-  },
-
-  /** Painel de exemplo no hero. Números ilustrativos — troque pelos reais se preferir. */
-  panel: {
-    title: "Fechamento · Março",
-    rows: [
-      { label: "Faturamento bruto", value: "R$ 148.320", tone: "neutral" },
-      { label: "Comissões da equipe", value: "− R$ 52.910", tone: "down" },
-      { label: "Taxas de cartão", value: "− R$ 4.176", tone: "down" },
-      { label: "Custos fixos", value: "− R$ 31.400", tone: "down" },
-      { label: "Lucro do mês", value: "R$ 59.834", tone: "up" },
-    ],
-    footnote: "Margem de 40,3% — 6,1 p.p. acima de fevereiro",
   },
 
   /** ATENÇÃO: esta seção eu escrevi. Não existia no seu site — ajuste se não bater. */
@@ -179,6 +169,15 @@ export const site = {
   },
 
   /** Canais oficiais de contato. */
+  logo: "/img/logo-vn.jpg",
+
+  chamadaDiagnostico: {
+    badge: "Gratuito · sem compromisso",
+    title: "Será que o seu salão precisa da VN?",
+    body: "Responda o diagnóstico e descubra em que estágio o financeiro do seu negócio está. A equipe VN analisa suas respostas e entra em contato.",
+    cta: "Fazer diagnóstico gratuito",
+  },
+
   contato: {
     email: "vncontroladoria@gmail.com",
     telefone: "(13) 98110-1850",
