@@ -13,11 +13,36 @@ type Stage = "intro" | "form" | "enviando" | "resultado" | "erro";
 type Answers = Record<string, string>;
 
 /**
+ * O site.ts usa `as const`, o que faz cada pergunta virar um tipo literal
+ * próprio — e aí campos opcionais como `scored` e `options` "somem" nas
+ * perguntas que não os declaram. Estes tipos descrevem o formato geral e
+ * o cast abaixo apaga essa diferença de uma vez.
+ */
+type Opcao = { label: string; weight?: number };
+type Pergunta = {
+  id: string;
+  q: string;
+  type: string;
+  scored?: boolean;
+  required?: boolean;
+  placeholder?: string;
+  options?: readonly Opcao[];
+};
+type Modulo = {
+  id: string;
+  nome: string;
+  descricao: string;
+  perguntas: readonly Pergunta[];
+};
+
+const modulos = diagnostico.modulos as readonly Modulo[];
+
+/**
  * Achata os módulos numa lista linear de telas, guardando de qual módulo
  * cada pergunta veio. Assim a navegação é simples (um índice só) e ainda
  * dá para mostrar em que módulo a pessoa está.
  */
-const telas = diagnostico.modulos.flatMap((modulo, mi) =>
+const telas = modulos.flatMap((modulo, mi) =>
   modulo.perguntas.map((pergunta, pi) => ({
     modulo,
     moduloIndex: mi,
@@ -44,7 +69,7 @@ export function Quiz() {
 
   /** Nota de cada módulo: só perguntas pontuadas entram na conta. */
   const notas = useMemo(() => {
-    return diagnostico.modulos
+    return modulos
       .filter((m) => m.perguntas.some((p) => p.scored !== false))
       .map((modulo) => {
         const pontuadas = modulo.perguntas.filter((p) => p.scored !== false);
@@ -151,7 +176,7 @@ export function Quiz() {
             </p>
 
             <ul className="mx-auto mt-8 flex max-w-md flex-wrap justify-center gap-2">
-              {diagnostico.modulos.map((m) => (
+              {modulos.map((m) => (
                 <li
                   key={m.id}
                   className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-[13px] text-fg-muted"
