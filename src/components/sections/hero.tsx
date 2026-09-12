@@ -6,9 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { site } from "@/content/site";
-import { cn } from "@/lib/cn";
 
-const { hero, panel } = site;
+const { hero } = site;
 
 /** Quebra a headline para aplicar gradiente de acento só na frase-chave. */
 function Headline() {
@@ -76,7 +75,7 @@ export function Hero() {
             {hero.primaryCta}
             <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
           </Button>
-          <Button size="lg" variant="secondary" href="#contato" className="w-full sm:w-auto">
+          <Button size="lg" variant="secondary" href={hero.secondaryHref} className="w-full sm:w-auto">
             {hero.secondaryCta}
           </Button>
         </motion.div>
@@ -97,8 +96,9 @@ export function Hero() {
 }
 
 /**
- * O painel é a peça central do hero: mostra o produto em vez de descrevê-lo.
- * Entra com leve rotação em X para sugerir profundidade.
+ * A foto da dupla é a primeira imagem da página — quem chega vê quem
+ * está por trás da VN antes de qualquer número. Entra com leve rotação
+ * em X para sugerir profundidade.
  */
 function HeroPanel() {
   const reduce = useReducedMotion();
@@ -109,51 +109,21 @@ function HeroPanel() {
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
       style={{ perspective: 1200 }}
-      className="relative mx-auto mt-16 max-w-3xl sm:mt-20"
+      className="relative mx-auto mt-16 max-w-md sm:mt-20"
     >
-      {/* halo por trás do painel */}
+      {/* halo por trás da foto */}
       <div
         aria-hidden
         className="absolute -inset-x-16 -top-10 bottom-0 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.16),transparent_70%)] blur-2xl"
       />
 
-      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-elevated/90 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(0,0,0,0.6),0_0_120px_rgba(34,197,94,0.08)] backdrop-blur-xl">
-        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.18),transparent)]" />
-
-        {/* barra de janela */}
-        <div className="flex items-center gap-3 border-b border-white/[0.06] px-5 py-3.5">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-          </div>
-          <span className="text-[13px] text-fg-muted">{panel.title}</span>
-        </div>
-
-        <div className="divide-y divide-white/[0.04]">
-          {panel.rows.map((row) => (
-            <div
-              key={row.label}
-              className="flex items-center justify-between px-5 py-3.5 text-sm transition-colors duration-200 hover:bg-white/[0.02]"
-            >
-              <span className="text-fg-muted">{row.label}</span>
-              <span
-                className={cn(
-                  "font-medium tabular-nums",
-                  row.tone === "up" && "text-emerald-300",
-                  row.tone === "down" && "text-white/55",
-                  row.tone === "neutral" && "text-fg",
-                )}
-              >
-                {row.value}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="border-t border-white/[0.06] bg-white/[0.02] px-5 py-3 text-[13px] text-fg-muted">
-          {panel.footnote}
-        </div>
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(0,0,0,0.6),0_0_120px_rgba(34,197,94,0.08)]">
+        <span className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.18),transparent)]" />
+        <img
+          src={hero.image}
+          alt="Nicollas Bueno e Carol Calixto, fundadores da VN — Visão do Negócio"
+          className="w-full"
+        />
       </div>
     </motion.div>
   );
