@@ -60,7 +60,7 @@ export const site = {
       {
         icon: "ChartSpline",
         title: "Controladoria completa",
-        body: "DRE, fluxo de caixa, indicadores e tomada de decisão baseada em dados — não em achismo.",
+        body: "Fluxo de caixa completo com indicadores para tomada de decisão baseada em dados reais — não achismo.",
         span: "hero",
       },
       {
