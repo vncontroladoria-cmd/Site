@@ -30,8 +30,8 @@ export function SiteNav() {
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#" className="flex items-center gap-2.5">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-accent/20 text-[13px] font-semibold text-fg shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)]">
-            VN
+          <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white">
+            <img src={site.logo} alt="" className="h-full w-full object-contain" />
           </span>
           <span className="text-[15px] font-medium tracking-tight text-fg">
             {site.name}
@@ -51,11 +51,8 @@ export function SiteNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost" size="sm" href="#ebooks">
-            eBooks
-          </Button>
-          <Button size="sm" href="/diagnostico">
-            Fazer diagnóstico
+          <Button size="sm" href={site.contato.whatsapp}>
+            Falar com especialista
           </Button>
         </div>
 
@@ -90,8 +87,8 @@ export function SiteNav() {
                   {item.label}
                 </a>
               ))}
-              <Button className="mt-3 w-full" href="/diagnostico">
-                Fazer diagnóstico
+              <Button className="mt-3 w-full" href={site.contato.whatsapp}>
+                Falar com especialista
               </Button>
             </div>
           </motion.div>
