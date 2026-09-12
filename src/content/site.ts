@@ -221,7 +221,7 @@ export const site = {
    * Tipos de pergunta: "text" | "tel" | "textarea" | "single" | "multi"
    */
   diagnostico: {
-    accessKey: "COLE-SUA-CHAVE-DO-WEB3FORMS-AQUI",
+    accessKey: "68a29601-894f-4644-b0c8-1e8c04720307",
     intro: {
       badge: "Diagnóstico gratuito · leva 5 minutos",
       title: "Salão sem números é como dirigir no escuro.",
