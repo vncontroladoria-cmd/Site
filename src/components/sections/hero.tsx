@@ -39,10 +39,13 @@ export function Hero() {
   return (
     <section ref={ref} className="relative px-5 pt-32 pb-16 sm:px-8 sm:pt-40 lg:pt-48 lg:pb-24">
       <motion.div style={style} className="mx-auto max-w-6xl text-center">
+        <HeroPanel />
+
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10"
         >
           <Badge>{hero.badge}</Badge>
         </motion.div>
@@ -89,8 +92,6 @@ export function Hero() {
           {hero.note}
         </motion.p>
       </motion.div>
-
-      <HeroPanel />
     </section>
   );
 }
@@ -105,11 +106,11 @@ function HeroPanel() {
 
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, y: 40, rotateX: 8 }}
+      initial={reduce ? false : { opacity: 0, y: 24, rotateX: 6 }}
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
-      transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{ perspective: 1200 }}
-      className="relative mx-auto mt-16 max-w-md sm:mt-20"
+      className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px]"
     >
       {/* halo por trás da foto */}
       <div
