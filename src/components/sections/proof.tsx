@@ -1,43 +1,56 @@
 import { Reveal } from "@/components/ui/reveal";
 import { site } from "@/content/site";
 
-const { proof } = site;
+const { proof, equipe } = site;
 
+/**
+ * Manifesto da VN. A foto da dupla ancora o bloco à esquerda e a frase
+ * fica solta, em tamanho grande — é o momento mais "marca" da página.
+ */
 export function Proof() {
   return (
     <section className="relative border-t border-white/[0.06] px-5 py-16 sm:px-8 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-20">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
           <Reveal>
-            <figure>
-            <blockquote className="text-xl leading-snug font-medium tracking-tight text-balance text-fg sm:text-2xl lg:text-3xl">
-              {proof.quote}
-            </blockquote>
-            <figcaption className="mt-7 flex items-center gap-3">
-              <span className="h-9 w-9 rounded-full border border-white/10 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.5),rgba(34,197,94,0.1))]" />
-              <span className="text-sm">
-                <span className="block text-fg">{proof.author}</span>
-                <span className="block text-fg-muted">{proof.role}</span>
-              </span>
-            </figcaption>
-            </figure>
+            <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(0,0,0,0.6),0_0_100px_rgba(34,197,94,0.08)]">
+              <img
+                src={equipe.photo}
+                alt="Nicollas Bueno e Carol Calixto, fundadores da VN"
+                className="w-full"
+                loading="lazy"
+              />
+            </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <dl className="divide-y divide-white/[0.06] border-y border-white/[0.06]">
-              {proof.stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-baseline justify-between gap-6 py-5"
-                >
-                  <dt className="text-sm text-fg-muted">{stat.label}</dt>
-                  <dd className="text-2xl font-semibold tracking-tight text-fg tabular-nums">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
+          <div>
+            <Reveal>
+              <figure>
+                <blockquote className="text-2xl leading-tight font-semibold tracking-tight text-balance text-fg sm:text-3xl lg:text-4xl">
+                  {proof.quote}
+                </blockquote>
+                <figcaption className="mt-6 text-sm">
+                  <span className="block text-fg">{proof.author}</span>
+                  <span className="block text-fg-muted">{proof.role}</span>
+                </figcaption>
+              </figure>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-white/[0.06] pt-8">
+                {proof.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dd className="text-2xl font-semibold tracking-tight text-fg tabular-nums">
+                      {stat.value}
+                    </dd>
+                    <dt className="mt-1 text-sm leading-snug text-fg-muted">
+                      {stat.label}
+                    </dt>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

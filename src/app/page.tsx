@@ -1,7 +1,9 @@
 import { Faq } from "@/components/sections/faq";
+import { Equipe } from "@/components/sections/equipe";
 import { Features } from "@/components/sections/features";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Hero } from "@/components/sections/hero";
+import { Metodos } from "@/components/sections/metodos";
 import { Pricing } from "@/components/sections/pricing";
 import { Proof } from "@/components/sections/proof";
 import { SiteFooter } from "@/components/sections/site-footer";
@@ -17,6 +19,8 @@ export default function Home() {
         <Steps />
         <Features />
         <Proof />
+        <Metodos />
+        <Equipe />
         <Pricing />
         <Faq />
         <FinalCta />

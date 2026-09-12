@@ -51,11 +51,11 @@ export function SiteNav() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost" size="sm" href="#contato">
-            Entrar
+          <Button variant="ghost" size="sm" href="#ebooks">
+            eBooks
           </Button>
-          <Button size="sm" href="#contato">
-            Agendar diagnóstico
+          <Button size="sm" href="/diagnostico">
+            Fazer diagnóstico
           </Button>
         </div>
 
@@ -90,8 +90,8 @@ export function SiteNav() {
                   {item.label}
                 </a>
               ))}
-              <Button className="mt-3 w-full" href="#contato">
-                Agendar diagnóstico
+              <Button className="mt-3 w-full" href="/diagnostico">
+                Fazer diagnóstico
               </Button>
             </div>
           </motion.div>

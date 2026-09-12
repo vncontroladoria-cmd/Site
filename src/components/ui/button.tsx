@@ -29,28 +29,39 @@ const sizes: Record<Size, string> = {
   lg: "h-11 px-5 text-sm",
 };
 
-interface ButtonProps extends React.ComponentPropsWithoutRef<"a"> {
+type ButtonProps = {
   variant?: Variant;
   size?: Size;
-}
+  className?: string;
+  children?: React.ReactNode;
+  /** Com href vira link; sem href vira botão de verdade (para onClick). */
+  href?: string;
+} & React.ButtonHTMLAttributes<HTMLButtonElement> &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "type">;
 
 /**
- * CTA renderizado como <a> porque nesta landing todo botão navega.
- * O efeito de brilho varrendo é um ::before controlado por group-hover.
+ * Um componente, dois elementos: <a> quando navega, <button> quando age.
+ * Isso importa para acessibilidade — leitor de tela e teclado tratam os
+ * dois de forma diferente, e link sem destino é um erro comum.
  */
 export function Button({
   variant = "primary",
   size = "md",
   className,
   children,
+  href,
   ...props
 }: ButtonProps) {
+  const Tag = (href ? "a" : "button") as "a";
+
   return (
-    <a
+    <Tag
+      href={href}
       className={cn(
         "group relative inline-flex select-none items-center justify-center gap-2 overflow-hidden rounded-lg font-medium",
         "transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
         "active:scale-[0.98]",
+        "disabled:pointer-events-none disabled:opacity-40",
         variants[variant],
         sizes[size],
         className,
@@ -60,6 +71,6 @@ export function Button({
       {/* brilho que varre da esquerda para a direita no hover */}
       <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.18),transparent)] transition-transform duration-500 ease-out group-hover:translate-x-full" />
       <span className="relative flex items-center gap-2">{children}</span>
-    </a>
+    </Tag>
   );
 }

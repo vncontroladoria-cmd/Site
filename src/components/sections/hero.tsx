@@ -72,7 +72,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
           className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <Button size="lg" href="#contato" className="w-full sm:w-auto">
+          <Button size="lg" href={hero.primaryHref} className="w-full sm:w-auto">
             {hero.primaryCta}
             <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
           </Button>

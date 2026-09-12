@@ -24,6 +24,15 @@ export function AmbientBackground() {
       <div className="absolute top-[45%] -right-32 h-[700px] w-[500px] animate-[float_11s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.10)_0%,transparent_70%)] blur-[100px]" />
       <div className="absolute bottom-0 left-1/3 h-[600px] w-[700px] animate-[pulse-soft_7s_ease-in-out_infinite] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.1)_0%,transparent_70%)] blur-[130px]" />
 
+      {/* 3b — linhas de luz descendo. Dão a sensação de página "viva"
+          sem competir com o conteúdo: são finas, verdes e lentas. */}
+      <div className="absolute inset-0">
+        <span className="absolute top-0 left-[15%] h-40 w-px animate-[beam_11s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(34,197,94,0.5),transparent)]" />
+        <span className="absolute top-0 left-[42%] h-56 w-px animate-[beam_16s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(34,197,94,0.35),transparent)] [animation-delay:4s]" />
+        <span className="absolute top-0 left-[68%] h-32 w-px animate-[beam_13s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(134,239,172,0.4),transparent)] [animation-delay:8s]" />
+        <span className="absolute top-0 left-[88%] h-48 w-px animate-[beam_19s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(34,197,94,0.3),transparent)] [animation-delay:2s]" />
+      </div>
+
       {/* 2 — ruído */}
       <div
         className="absolute inset-0 opacity-[0.015]"
