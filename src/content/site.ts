@@ -305,7 +305,7 @@ export const site = {
   },
 
   finalCta: {
-    title: "Vamos conversar sobre o seu negócio?",
+    title: "Vamos conversar sobre o seu salão?",
     body: "Atendimento humano, direto com a equipe VN. Sem robô, sem promessa vazia. Chame no WhatsApp e descubra como podemos destravar o seu financeiro.",
     cta: "Chamar no WhatsApp",
   },
