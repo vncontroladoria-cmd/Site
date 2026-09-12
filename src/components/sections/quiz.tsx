@@ -207,6 +207,9 @@ export function Quiz() {
             <h2 className="text-xl leading-snug font-semibold tracking-tight text-balance text-fg sm:text-2xl">
               {pergunta.q}
             </h2>
+            {!pergunta.required && (
+              <p className="mt-2 text-[13px] text-fg-muted">Opcional</p>
+            )}
 
             <div className="mt-8">
               {pergunta.type === "single" && (
@@ -232,6 +235,17 @@ export function Quiz() {
                     );
                   })}
                 </div>
+              )}
+
+              {pergunta.type === "textarea" && (
+                <textarea
+                  value={valor}
+                  onChange={(e) => set(e.target.value)}
+                  placeholder={pergunta.placeholder}
+                  rows={5}
+                  className={`${inputClass} resize-none`}
+                  autoFocus
+                />
               )}
 
               {(pergunta.type === "text" || pergunta.type === "tel") && (
