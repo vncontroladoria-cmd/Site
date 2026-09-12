@@ -27,7 +27,7 @@ const icons: Record<string, LucideIcon> = {
  * No mobile tudo vira coluna única.
  */
 const spans: Record<string, string> = {
-  hero: "md:col-span-4 md:row-span-2",
+  hero: "md:col-span-4",
   wide: "md:col-span-2 lg:col-span-3",
   normal: "md:col-span-2",
 };
@@ -62,15 +62,15 @@ export function Features() {
                 <SpotlightCard className="h-full">
                   <div
                     className={cn(
-                      "flex h-full flex-col p-6",
-                      isHero ? "justify-between sm:p-8" : "justify-start",
+                      "flex h-full flex-col justify-start p-6",
+                      isHero && "sm:p-8",
                     )}
                   >
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-accent shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]">
                       <Icon size={18} strokeWidth={1.75} />
                     </span>
 
-                    <div className={isHero ? "mt-8" : "mt-5"}>
+                    <div className="mt-5">
                       <h3
                         className={cn(
                           "font-semibold tracking-tight text-fg",
@@ -81,7 +81,7 @@ export function Features() {
                       </h3>
                       <p
                         className={cn(
-                          "mt-2 leading-relaxed text-fg-muted",
+                          "mt-2 leading-relaxed text-white/70",
                           isHero ? "max-w-md text-sm sm:text-base" : "text-sm",
                         )}
                       >
