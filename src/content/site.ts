@@ -212,67 +212,128 @@ export const site = {
   },
 
   /**
-   * DIAGNÓSTICO — formulário completo.
+   * DIAGNÓSTICO EM MÓDULOS.
    *
-   * As respostas são enviadas por e-mail via Web3Forms (sem banco de dados).
-   * Pegue sua chave gratuita em web3forms.com e cole em accessKey abaixo.
+   * Cada módulo recebe nota própria: soma dos pesos / (nº de perguntas × 2).
+   * Perguntas com "scored: false" são apenas informativas e não entram na nota.
+   * O módulo com a pior nota vira a prioridade apontada no resultado.
    *
-   * Tipos de pergunta: "text" | "tel" | "textarea" | "single" | "multi"
+   * As respostas vão por e-mail via Web3Forms (sem banco de dados).
    */
   diagnostico: {
     accessKey: "68a29601-894f-4644-b0c8-1e8c04720307",
     intro: {
-      badge: "Diagnóstico gratuito · leva 5 minutos",
+      badge: "6 módulos · cerca de 5 minutos",
       title: "Salão sem números é como dirigir no escuro.",
-      body: "Gestão financeira não é custo. É o que separa empresas que crescem das que apenas sobrevivem. Responda com sinceridade — a equipe VN analisa e entra em contato.",
+      body: "Este diagnóstico olha seis frentes do seu negócio: caixa, preço, equipe, estoque, disciplina financeira e perfil. No fim você vê a nota de cada uma e onde está o problema real.",
       cta: "Começar diagnóstico",
     },
-    questions: [
-      { id: "nome", q: "Qual o seu nome completo?", type: "text", required: true, placeholder: "Nome e sobrenome" },
-      { id: "telefone", q: "Telefone para contato", type: "tel", required: true, placeholder: "(00) 00000-0000" },
-      { id: "cnpj", q: "Qual o CNPJ da empresa?", type: "text", required: true, placeholder: "00.000.000/0000-00" },
-      { id: "area", q: "Qual a área de atuação do negócio?", type: "single", required: true,
-        options: ["Salão de beleza", "Barbearia", "Clínica de estética", "Studio individual", "Outro"] },
-      { id: "sistema", q: "Qual sistema você usa no salão atualmente?", type: "text", required: true, placeholder: "Belle, Avec, Trinks, planilha, nenhum…" },
-      { id: "recepcao", q: "Possui recepção? Se sim, quantas pessoas?", type: "text", required: true, placeholder: "Ex: sim, 2 / não" },
-      { id: "cabeleireiro", q: "Possui cabeleireiro? Quantos?", type: "text", required: true, placeholder: "Ex: sim, 4 / não" },
-      { id: "manicure", q: "Possui manicure? Quantas?", type: "text", required: true, placeholder: "Ex: sim, 3 / não" },
-      { id: "esteticista", q: "Possui esteticista? Quantas?", type: "text", required: true, placeholder: "Ex: sim, 1 / não" },
-      { id: "auxiliar", q: "Possui auxiliar? Quantos?", type: "text", required: true, placeholder: "Ex: sim, 2 / não" },
-      { id: "estoquista", q: "Possui estoquista?", type: "single", required: true, options: ["Sim", "Não"] },
-      { id: "locacao", q: "Faz locação de sala?", type: "single", required: true, options: ["Sim", "Não"] },
-      { id: "faturamento", q: "Qual a média de faturamento mensal?", type: "single", required: true,
-        options: ["Até R$ 20 mil", "R$ 20 mil a R$ 50 mil", "R$ 50 mil a R$ 100 mil", "R$ 100 mil a R$ 200 mil", "Acima de R$ 200 mil"] },
-      { id: "lucro", q: "Você sabe exatamente quanto lucro o seu salão teve no último mês?", type: "single", required: true,
-        options: ["Sim, com clareza", "Tenho uma noção", "Não sei direito"] },
-      { id: "acompanha", q: "Você acompanha diariamente o faturamento do salão?", type: "single", required: true,
-        options: ["Sim, todo dia", "De vez em quando", "Não acompanho"] },
-      { id: "clientes", q: "Você sabe quantos clientes o salão atende por mês? Se sim, quantos em média?", type: "text", required: true, placeholder: "Ex: cerca de 400 / não sei" },
-      { id: "equilibrio", q: "Você sabe qual é o ponto de equilíbrio do seu salão? Quanto precisa faturar para não ficar no prejuízo? Se sim, qual o valor?", type: "text", required: true, placeholder: "Ex: R$ 60 mil / não sei" },
-      { id: "pfpj", q: "Você tem o hábito de misturar Pessoa Física com Pessoa Jurídica?", type: "single", required: true,
-        options: ["Sim, com frequência", "Às vezes", "Não, é tudo separado"] },
-      { id: "juros", q: "Já pagou conta atrasada e gerou juros por esquecimento ou correria do dia a dia?", type: "single", required: true,
-        options: ["Sim, já aconteceu várias vezes", "Sim, uma ou outra vez", "Não"] },
-      { id: "crescendo", q: "Se eu perguntasse agora: seu salão está crescendo ou apenas sobrevivendo? Você conseguiria responder com certeza?", type: "single", required: true,
-        options: ["Sim, com certeza", "Mais ou menos", "Não saberia responder"] },
-      { id: "beneficio", q: "Por que você acredita que terceirizar o financeiro traria benefício? Pode marcar mais de uma.", type: "multi", required: true,
-        options: [
-          "Ter um time completo sem encargos de contratação",
-          "Sobrar tempo para cuidar do atendimento e da equipe",
-          "Enxergar o lucro real do negócio",
-          "Ter clareza de metas e decisões",
-          "Parar de misturar PF com PJ",
-          "Reduzir erros e pagamentos atrasados",
-        ] },
-      { id: "expectativa", q: "Com suas palavras: o que você acha que uma terceirizada financeira faz e o que espera encontrar?", type: "textarea", required: true, placeholder: "Escreva do seu jeito, sem formalidade." },
-      { id: "duvidas", q: "Quais dúvidas você tem sobre esse tipo de serviço?", type: "textarea", required: false, placeholder: "Pode deixar em branco se não tiver nenhuma." },
-      { id: "concorrente", q: "Você acredita que um concorrente com time financeiro pode sair na frente do seu salão por ter clareza das metas?", type: "single", required: true,
-        options: ["Sim, com certeza", "Talvez", "Não acredito nisso"] },
+    modulos: [
+      {
+        id: "perfil",
+        nome: "Perfil do negócio",
+        descricao: "Para entendermos o porte e o tipo de operação.",
+        perguntas: [
+          { id: "nome", q: "Qual o seu nome completo?", type: "text", scored: false, required: true, placeholder: "Nome e sobrenome" },
+          { id: "telefone", q: "Telefone para contato", type: "tel", scored: false, required: true, placeholder: "(00) 00000-0000" },
+          { id: "tipo", q: "Que tipo de negócio você tem?", type: "single", scored: false, required: true,
+            options: [{ label: "Salão de beleza" }, { label: "Barbearia" }, { label: "Clínica de estética" }, { label: "Studio individual" }, { label: "Outro" }] },
+          { id: "profissionais", q: "Quantos profissionais trabalham no seu negócio?", type: "single", scored: false, required: true,
+            options: [{ label: "Até 3" }, { label: "De 4 a 8" }, { label: "De 9 a 15" }, { label: "Mais de 15" }] },
+          { id: "clientes", q: "Quantos clientes o negócio atende por mês, em média?", type: "single", scored: false, required: true,
+            options: [{ label: "Até 150" }, { label: "De 150 a 400" }, { label: "De 400 a 800" }, { label: "Mais de 800" }, { label: "Não sei dizer" }] },
+          { id: "faturamento", q: "Qual a média de faturamento mensal?", type: "single", scored: false, required: true,
+            options: [{ label: "Até R$ 20 mil" }, { label: "R$ 20 mil a R$ 50 mil" }, { label: "R$ 50 mil a R$ 100 mil" }, { label: "R$ 100 mil a R$ 200 mil" }, { label: "Acima de R$ 200 mil" }] },
+        ],
+      },
+      {
+        id: "caixa",
+        nome: "Caixa e controle",
+        descricao: "Se o dinheiro que entra e sai é conferido de verdade.",
+        perguntas: [
+          { id: "confere_caixa", q: "Você confere as entradas e saídas do caixa todos os dias?", type: "single", required: true,
+            options: [{ label: "Sim, fecho o caixa todo dia", weight: 2 }, { label: "Às vezes, quando sobra tempo", weight: 1 }, { label: "Não confiro", weight: 0 }] },
+          { id: "lucro_mes", q: "Você sabe quanto o negócio lucrou no último mês?", type: "single", required: true,
+            options: [{ label: "Sim, sei o valor exato", weight: 2 }, { label: "Tenho uma noção aproximada", weight: 1 }, { label: "Não sei dizer", weight: 0 }] },
+          { id: "maquininha", q: "As vendas na maquininha batem com o que cai na conta do banco?", type: "single", required: true,
+            options: [{ label: "Confiro sempre e bate", weight: 2 }, { label: "Já confiri algumas vezes", weight: 1 }, { label: "Nunca confiri", weight: 0 }] },
+          { id: "relatorio", q: "Você tem um relatório mensal que mostra o resultado do negócio?", type: "single", required: true,
+            options: [{ label: "Sim, recebo todo mês", weight: 2 }, { label: "Faço de vez em quando", weight: 1 }, { label: "Não tenho nada disso", weight: 0 }] },
+        ],
+      },
+      {
+        id: "preco",
+        nome: "Custos e preço",
+        descricao: "Se a tabela de preços cobre o custo real de atender.",
+        perguntas: [
+          { id: "custo_servico", q: "Você sabe quanto custa executar cada serviço, contando produto e tempo de cadeira?", type: "single", required: true,
+            options: [{ label: "Sim, sei serviço por serviço", weight: 2 }, { label: "Sei de alguns, não de todos", weight: 1 }, { label: "Nunca calculei", weight: 0 }] },
+          { id: "tabela", q: "Como a sua tabela de preços foi definida?", type: "single", required: true,
+            options: [{ label: "Com base em custo e margem", weight: 2 }, { label: "Olhando o que a concorrência cobra", weight: 1 }, { label: "No feeling, foi surgindo", weight: 0 }] },
+          { id: "despesa_fixa", q: "Você sabe quanto gasta de despesa fixa por mês?", type: "single", required: true,
+            options: [{ label: "Sei o valor exato", weight: 2 }, { label: "Sei mais ou menos", weight: 1 }, { label: "Não faço ideia", weight: 0 }] },
+          { id: "equilibrio", q: "Você sabe quanto precisa faturar para não ter prejuízo no mês?", type: "single", required: true,
+            options: [{ label: "Sim, sei o valor", weight: 2 }, { label: "Tenho uma ideia vaga", weight: 1 }, { label: "Nunca calculei", weight: 0 }] },
+        ],
+      },
+      {
+        id: "equipe",
+        nome: "Equipe e comissão",
+        descricao: "Se a cadeira que mais fatura é também a que mais dá lucro.",
+        perguntas: [
+          { id: "comissao", q: "Como a comissão da equipe é calculada hoje?", type: "single", required: true,
+            options: [{ label: "Regra clara, calculada por sistema", weight: 2 }, { label: "Planilha feita à mão todo mês", weight: 1 }, { label: "Na hora, de cabeça", weight: 0 }] },
+          { id: "lucro_profissional", q: "Você sabe quanto cada profissional gera de lucro, não só de faturamento?", type: "single", required: true,
+            options: [{ label: "Sim, acompanho por pessoa", weight: 2 }, { label: "Só o faturamento", weight: 1 }, { label: "Não acompanho", weight: 0 }] },
+          { id: "metas", q: "A equipe tem metas claras de faturamento?", type: "single", required: true,
+            options: [{ label: "Sim, e acompanhamos juntos", weight: 2 }, { label: "Existem, mas ninguém acompanha", weight: 1 }, { label: "Não temos metas", weight: 0 }] },
+          { id: "conflito", q: "Já teve conflito com profissional por erro no cálculo de comissão?", type: "single", required: true,
+            options: [{ label: "Nunca aconteceu", weight: 2 }, { label: "Uma ou outra vez", weight: 1 }, { label: "Acontece com frequência", weight: 0 }] },
+        ],
+      },
+      {
+        id: "estoque",
+        nome: "Estoque e produtos",
+        descricao: "Produto parado e perda invisível saem direto do lucro.",
+        perguntas: [
+          { id: "controle_estoque", q: "Você tem controle de estoque dos produtos?", type: "single", required: true,
+            options: [{ label: "Sim, em sistema atualizado", weight: 2 }, { label: "Planilha ou caderno", weight: 1 }, { label: "Não tenho controle", weight: 0 }] },
+          { id: "valor_estoque", q: "Você sabe quanto tem parado em produto neste momento?", type: "single", required: true,
+            options: [{ label: "Sei o valor", weight: 2 }, { label: "Sei mais ou menos", weight: 1 }, { label: "Não faço ideia", weight: 0 }] },
+          { id: "perda", q: "Já perdeu produto por validade vencida ou sumiço?", type: "single", required: true,
+            options: [{ label: "Nunca", weight: 2 }, { label: "Raramente", weight: 1 }, { label: "Acontece com frequência", weight: 0 }] },
+          { id: "compra", q: "Como você decide a hora de comprar produto?", type: "single", required: true,
+            options: [{ label: "Compra planejada pelo consumo", weight: 2 }, { label: "Quando lembro de olhar", weight: 1 }, { label: "Quando acaba", weight: 0 }] },
+        ],
+      },
+      {
+        id: "disciplina",
+        nome: "Disciplina financeira",
+        descricao: "A fronteira entre o dinheiro da empresa e o seu.",
+        perguntas: [
+          { id: "pf_pj", q: "O dinheiro da empresa está separado do seu dinheiro pessoal?", type: "single", required: true,
+            options: [{ label: "Totalmente separado", weight: 2 }, { label: "Mais ou menos", weight: 1 }, { label: "É tudo a mesma conta", weight: 0 }] },
+          { id: "prolabore", q: "Você tem um pró-labore definido?", type: "single", required: true,
+            options: [{ label: "Sim, valor fixo todo mês", weight: 2 }, { label: "Retiro conforme a necessidade", weight: 1 }, { label: "Não tenho pró-labore", weight: 0 }] },
+          { id: "boleto", q: "Já pagou boleto atrasado por esquecimento ou correria?", type: "single", required: true,
+            options: [{ label: "Nunca", weight: 2 }, { label: "Raramente", weight: 1 }, { label: "Acontece direto", weight: 0 }] },
+          { id: "previsao", q: "Você consegue prever o caixa dos próximos 60 dias?", type: "single", required: true,
+            options: [{ label: "Sim, tenho projeção", weight: 2 }, { label: "Só do mês atual", weight: 1 }, { label: "Vou vendo no dia a dia", weight: 0 }] },
+        ],
+      },
     ],
-    sucesso: {
-      title: "Diagnóstico enviado.",
-      body: "Recebemos suas respostas. A equipe VN vai analisar e entrar em contato pelo telefone que você informou. Se preferir adiantar, chame no WhatsApp.",
-      cta: "Chamar no WhatsApp",
+    /** Classificação de cada módulo pela porcentagem. */
+    faixas: [
+      { min: 75, rotulo: "Saudável", descricao: "Essa frente está sob controle." },
+      { min: 40, rotulo: "Atenção", descricao: "Funciona, mas depende de você lembrar." },
+      { min: 0, rotulo: "Crítico", descricao: "Aqui o dinheiro vaza sem ninguém ver." },
+    ],
+    resultado: {
+      title: "Seu diagnóstico está pronto.",
+      prioridadeLabel: "Prioridade número 1",
+      body: "Estes são os seis eixos do seu negócio. A VN começa sempre pelo mais frágil — é onde o resultado aparece mais rápido.",
+      cta: "Falar com a equipe VN",
+      nota: "Uma cópia deste diagnóstico foi enviada para a equipe VN. Entramos em contato pelo telefone que você informou.",
     },
     erro: "Não conseguimos enviar agora. Tente de novo ou chame no WhatsApp.",
   },
