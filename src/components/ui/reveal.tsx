@@ -14,9 +14,9 @@ interface RevealProps {
  * Fade + 24px de subida ao montar o componente.
  *
  * NÃO usa whileInView/IntersectionObserver de propósito: navegadores
- * embutidos (Instagram, Facebook, TikTok) não disparam o observer de
- * forma confiável e o conteúdo ficava preso em opacity: 0. Animando no
- * mount, o conteúdo sempre termina visível em qualquer navegador.
+ * embutidos (Instagram, Facebook, TikTok) não disparam o observer de forma
+ * confiável e o conteúdo ficava preso em opacity: 0. Animando no mount, o
+ * conteúdo sempre termina visível em qualquer navegador.
  */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
   const reduce = useReducedMotion();
