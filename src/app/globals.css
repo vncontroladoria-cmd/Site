@@ -135,6 +135,7 @@
     #22c55e
   );
   background-size: 200% auto;
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: var(--animate-shimmer);
