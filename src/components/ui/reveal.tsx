@@ -11,12 +11,12 @@ interface RevealProps {
 }
 
 /**
- * Entrada ao entrar na viewport: fade + 24px de subida, uma vez só.
- * Com prefers-reduced-motion o conteúdo já nasce visível.
+ * Fade + 24px de subida ao montar o componente.
  *
- * viewport.amount: "some" — dispara assim que qualquer parte do bloco
- * entra na tela. Com amount numérico (ex.: 0.2) blocos mais altos que a
- * tela nunca atingiam o percentual no celular e ficavam invisíveis.
+ * NÃO usa whileInView/IntersectionObserver de propósito: navegadores
+ * embutidos (Instagram, Facebook, TikTok) não disparam o observer de
+ * forma confiável e o conteúdo ficava preso em opacity: 0. Animando no
+ * mount, o conteúdo sempre termina visível em qualquer navegador.
  */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
   const reduce = useReducedMotion();
@@ -27,8 +27,7 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
     <motion.div
       className={className}
       initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: "some", margin: "0px 0px -80px 0px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
